@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGI - Sistema de Gestão de Inventário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-10">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="mb-8 text-center md:text-left">
+            <h1 class="text-3xl font-extrabold text-slate-800">Cadastro de Produtos</h1>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <section class="lg:col-span-1">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+                    <h2 class="text-xl font-bold mb-6 text-slate-700 flex items-center gap-2">
+                        <span>📦</span> Dados do Produto
+                    </h2>
+                    
+                    <form id="produto-form" class="space-y-4">
+                        <input type="hidden" id="produto-id">
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600">Nome do Produto</label>
+                            <input type="text" id="nome" class="w-full mt-1 p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600">Categoria</label>
+                            <select id="categoria" class="w-full mt-1 p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                                <option value="">Selecione...</option>
+                                <option value="Eletrônicos">Eletrônicos</option>
+                                <option value="Móveis">Móveis</option>
+                                <option value="Alimentos">Alimentos</option>
+                                <option value="Vestuário">Vestuário</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-600">Preço (R$)</label>
+                                <input type="number" id="preco" step="0.01" class="w-full mt-1 p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-600">Quantidade</label>
+                                <input type="number" id="quantidade" class="w-full mt-1 p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600">URL da Imagem</label>
+                            <input type="url" id="imagem" placeholder="https://exemplo.com/foto.jpg" class="w-full mt-1 p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600">Descrição</label>
+                            <textarea id="descricao" rows="2" class="w-full mt-1 p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                        </div>
+
+                        <div class="flex items-center gap-2 py-2">
+                            <input type="checkbox" id="status" class="w-4 h-4 text-blue-600" checked>
+                            <label for="status" class="text-sm font-medium text-slate-700">Produto Ativo</label>
+                        </div>
+
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all shadow-md">
+                            Salvar Produto
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="lg:col-span-2">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                    <h2 class="text-2xl font-bold text-slate-800">Lista de Produtos</h2>
+                    
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <select id="filtro-categoria" class="bg-white border p-2 rounded-lg text-sm shadow-sm flex-1">
+                            <option value="todos">Todas Categorias</option>
+                            <option value="Eletrônicos">Eletrônicos</option>
+                            <option value="Móveis">Móveis</option>
+                            <option value="Alimentos">Alimentos</option>
+                        </select>
+                        <button id="ordenar-preco" class="bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                            ⇅ Preço
+                        </button>
+                    </div>
+                </div>
+
+                <div id="lista-produtos" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    </div>
+
+                <div id="lista-vazia" class="hidden text-center py-20">
+                    <p class="text-slate-400 text-lg">Nenhum produto cadastrado no momento.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
